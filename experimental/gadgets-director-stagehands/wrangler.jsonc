@@ -1,0 +1,28 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "ai": { "binding": "AI", "remote": true },
+  "compatibility_date": "2026-01-28",
+  "compatibility_flags": ["nodejs_compat", "experimental"],
+  "assets": {
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/agents/*"]
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "class_name": "DirectorAgent",
+        "name": "DirectorAgent"
+      }
+      // StagehandAgent is NOT declared here. It will be instantiated as a
+      // facet by the director in the server implementation.
+    ]
+  },
+  "main": "src/server.ts",
+  "migrations": [
+    {
+      "new_sqlite_classes": ["DirectorAgent"],
+      "tag": "v1"
+    }
+  ],
+  "name": "gadgets-director-stagehands"
+}
